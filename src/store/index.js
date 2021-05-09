@@ -21,5 +21,6 @@ export default new Vuex.Store({
       city.time = currentAqi.time;
       return city;
     }),
+    getCityDetails: (state) => (cityName) => state.cities.find((i) => i.name === cityName),
   },
 });

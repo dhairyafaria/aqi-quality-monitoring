@@ -9,6 +9,9 @@
         :items="cities"
         class="elevation-1 aqi-table"
       >
+        <template v-slot:[`item.name`]="{ item }">
+          <router-link :to="`/city/${item.name}`">{{item.name}}</router-link>
+        </template>
         <template v-slot:[`item.aqi`]="{ item }">
           <span class="aqi-col-value"
             :class="{
@@ -28,13 +31,14 @@
         </template>
       </v-data-table>
     </v-app>
+    <div v-if="cities.length == 0">Loading...</div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
-import dateMixin from '../mixins/date-mixin';
+import utilsMixin from '../mixins/utils';
 
 export default {
   name: 'Home',
@@ -42,7 +46,7 @@ export default {
     // HelloWorld,
   },
   mixins: [
-    dateMixin,
+    utilsMixin,
   ],
   computed: {
     cities() {
